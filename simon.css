@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: rgb(08,08,40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 700px;
+}
+
+#game-container{
+    width: 500px;
+    height: 500px;
+    background-color: aqua;
+}
+
+#colors{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    width: 100%;
+    height: 100%;
+}
+
+#green, #red, #yellow, #blue{
+    width: 100%;
+    height: 100%;
+}
+
+#green{
+    background-color: darkgreen;
+}
+
+#red{
+    background-color: darkred;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#blue{
+    background-color: darkblue;
+}
