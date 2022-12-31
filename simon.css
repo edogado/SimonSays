@@ -7,17 +7,16 @@
 }
 
 body{
-    background-color: rgb(08,08,40);
+    background-color: rgb(07,07,30);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 700px;
+    min-height: 800px;
 }
 
 #game-container{
     width: 500px;
     height: 500px;
-    background-color: aqua;
 }
 
 #colors{
@@ -32,18 +31,61 @@ body{
     height: 100%;
 }
 
+#green::before, #red::before, #yellow::before, #blue::before{
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 35%;
+    cursor: auto;
+    background-color: black;
+}
+
 #green{
     background-color: darkgreen;
+    border-radius: 100% 0 0 0;
+    position: relative;
+    cursor: pointer;
+}
+
+#green::before{
+    right: 0;
+    bottom: 0;
+    border-radius: 100% 0 0 0 ;
 }
 
 #red{
     background-color: darkred;
+    border-radius: 0 100% 0 0;
+    position: relative;
+    cursor: pointer;
+}
+
+#red::before{
+    bottom: 0;
+    border-radius: 0 100% 0 0 ;
 }
 
 #yellow{
     background-color: yellow;
+    border-radius: 0 0 0 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+#yellow::before{
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 100% ;
 }
 
 #blue{
     background-color: darkblue;
+    border-bottom-right-radius: 250px;
+    position: relative;
+    cursor: pointer;
+}
+
+#blue::before{
+    top: 0;
+    border-radius: 0 0 100% 0;
 }
