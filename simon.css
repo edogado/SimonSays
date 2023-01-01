@@ -9,9 +9,11 @@
 body{
     background-color: rgb(07,07,30);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    min-height: 800px;
+    min-height: 100vh;
+    color: white;
 }
 
 #game-container{
