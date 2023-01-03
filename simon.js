@@ -44,13 +44,12 @@ class Simon{
             await this.sleep(1000).then( () => {});
         }
     }
+}
 
-
+class User{
+    pattern = [];
 }
 
 simon = new Simon;
-simon.runGame()
-simon.runGame();
-simon.runGame()
-simon.runGame();
+
 console.log(simon.getPattern);
