@@ -48,6 +48,10 @@ class Simon{
 
 class User{
     pattern = [];
+
+    sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
 
 simon = new Simon;
