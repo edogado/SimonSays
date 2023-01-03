@@ -61,6 +61,12 @@ class User{
             greenButton.style.background = 'darkgreen';
         });
 
+        redButton.addEventListener('click', async () => {
+            redButton.style.background = 'red';
+            await  this.sleep(1000);
+            redButton.style.background = 'darkred';
+        });
+
     }
 }
 
