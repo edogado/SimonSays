@@ -4,6 +4,7 @@ const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
 
+
 class Simon{
     #pattern = []
     get getPattern(){
@@ -52,8 +53,19 @@ class User{
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    play(){
+        greenButton.addEventListener('click', async () => {
+            greenButton.style.background = 'limegreen';
+            await this.sleep(1000);
+            greenButton.style.background = 'darkgreen';
+        });
+
+    }
 }
 
 simon = new Simon;
+user = new User;
+user.play();
 
 console.log(simon.getPattern);
