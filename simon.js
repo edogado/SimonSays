@@ -49,7 +49,6 @@ class Simon{
 
 class User{
     pattern = [];
-    buttons = [greenButton, redButton, yellowButton, blueButton];
 
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
