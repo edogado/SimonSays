@@ -50,23 +50,33 @@ class Simon{
 class User{
     pattern = [];
 
+    static isAButtonOn = false;
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     play(){
+
         greenButton.addEventListener('click', async () => {
-            greenButton.style.background = 'limegreen';
-            this.pattern.push(1);
-            await this.sleep(1000);
-            greenButton.style.background = 'darkgreen';
+            if(!this.isAButtonOn){
+                this.isAButtonOn = true;
+                greenButton.style.background = 'limegreen';
+                this.pattern.push(1);
+                await this.sleep(1000);
+                greenButton.style.background = 'darkgreen';
+            }
+            this.isAButtonOn = false;
         });
 
         redButton.addEventListener('click', async () => {
-            redButton.style.background = 'red';
-            this.pattern.push(2);
-            await  this.sleep(1000);
-            redButton.style.background = 'darkred';
+            if (!this.isAButtonOn) {
+                this.isAButtonOn = true;
+                redButton.style.background = 'red';
+                this.pattern.push(2);
+                await this.sleep(1000);
+                redButton.style.background = 'darkred';
+            }
+            this.isAButtonOn = false;
         });
 
         yellowButton.addEventListener('click', async ()=> {
