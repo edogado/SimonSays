@@ -57,30 +57,30 @@ class User{
     play(){
         greenButton.addEventListener('click', async () => {
             greenButton.style.background = 'limegreen';
+            this.pattern.push(1);
             await this.sleep(1000);
             greenButton.style.background = 'darkgreen';
-            this.pattern.push(1);
         });
 
         redButton.addEventListener('click', async () => {
             redButton.style.background = 'red';
+            this.pattern.push(2);
             await  this.sleep(1000);
             redButton.style.background = 'darkred';
-            this.pattern.push(2);
         });
 
         yellowButton.addEventListener('click', async ()=> {
             yellowButton.style.background = 'yellow';
+            this.pattern.push(3);
             await this.sleep(1000);
             yellowButton.style.background = '#B58B00';
-            this.pattern.push(3);
         });
 
         blueButton.addEventListener('click', async ()=> {
             blueButton.style.background = 'blue';
+            this.pattern.push(4);
             await this.sleep(1000);
             blueButton.style.background = 'darkblue';
-            this.pattern.push(4);
         });
     }
 }
