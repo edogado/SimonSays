@@ -56,20 +56,33 @@ class User{
     }
 
     play(){
-        for (let i = 0; i < this.buttons.length; i++) {
-            this.buttons[i].addEventListener('click', async () => {
-                switch (this.buttons[i].id) {
-                    case ('green'):
-                        this.buttons[i].style.background = 'limegreen';
-                        await this.sleep(1000);
-                        this.buttons[i].style.background = 'darkgreen';
-                        break;
-                    default:
+        greenButton.addEventListener('click', async () => {
+            greenButton.style.background = 'limegreen';
+            await this.sleep(1000);
+            greenButton.style.background = 'darkgreen';
+            this.pattern.push(1);
+        });
 
-                }
-            });
-        }
+        redButton.addEventListener('click', async () => {
+            redButton.style.background = 'red';
+            await  this.sleep(1000);
+            redButton.style.background = 'darkred';
+            this.pattern.push(2);
+        });
 
+        yellowButton.addEventListener('click', async ()=> {
+            yellowButton.style.background = 'yellow';
+            await this.sleep(1000);
+            yellowButton.style.background = '#B58B00';
+            this.pattern.push(3);
+        });
+
+        blueButton.addEventListener('click', async ()=> {
+            blueButton.style.background = 'blue';
+            await this.sleep(1000);
+            blueButton.style.background = 'darkblue';
+            this.pattern.push(4);
+        });
     }
 }
 
