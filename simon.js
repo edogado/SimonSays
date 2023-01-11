@@ -91,10 +91,14 @@ class User{
         });
 
         blueButton.addEventListener('click', async ()=> {
-            blueButton.style.background = 'blue';
-            this.pattern.push(4);
-            await this.sleep(1000);
-            blueButton.style.background = 'darkblue';
+            if (!this.isAButtonOn){
+                this.isAButtonOn = true;
+                blueButton.style.background = 'blue';
+                this.pattern.push(4);
+                await this.sleep(1000);
+                blueButton.style.background = 'darkblue';
+            }
+            this.isAButtonOn = false;
         });
     }
 }
