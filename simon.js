@@ -48,20 +48,16 @@ class Simon{
 }
 
 class User{
-    aiPattern;
-
-    constructor(computerPattern) {
-        this.aiPattern = computerPattern;
-    }
     pattern = [];
 
-    static isAButtonOn = false;
+    isAButtonOn = false;
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     comparePattern(computersPattern){
         for (let i = 0; i < computersPattern.length; i++){
+            console.log(computersPattern[i] + '==> ' +this.pattern[i]);
             if (computersPattern[i] !== this.pattern[i]){
                 return false;
             }
@@ -69,14 +65,13 @@ class User{
         return true;
     }
 
-    play(){
-
+    play(computersPattern){
         greenButton.addEventListener('click', async () => {
             if(!this.isAButtonOn){
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
                 this.pattern.push(1);
-                if (this.comparePattern(this.aiPattern)) alert('worked');
+                if (this.comparePattern(computersPattern)) alert('worked');
                 await this.sleep(1000);
                 greenButton.style.background = 'darkgreen';
             }
@@ -120,6 +115,6 @@ class User{
 
 simon = new Simon;
 simon.runGame();
-user = new User(simon.getPattern);
-user.play();
+user = new User;
+user.play(simon.getPattern);
 
