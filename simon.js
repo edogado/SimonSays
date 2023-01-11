@@ -5,7 +5,7 @@ const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
 
 
-class Simon{
+class Computer {
     #pattern = []
     get getPattern(){
         return this.#pattern;
@@ -71,7 +71,6 @@ class User{
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
                 this.pattern.push(1);
-                if (this.comparePattern(computersPattern)) alert('worked');
                 await this.sleep(1000);
                 greenButton.style.background = 'darkgreen';
             }
@@ -113,8 +112,32 @@ class User{
     }
 }
 
-simon = new Simon;
-simon.runGame();
-user = new User;
-user.play(simon.getPattern);
+class Simon{
+
+    constructor() {
+        this.computer = new Computer();
+        this.user = new User();
+    }
+    gameOver = false;
+    computersTurn = true;
+    usersTurn = false;
+
+    startGame(){
+        while(!this.gameOver){
+            while (this.computersTurn){
+                this.computer.runGame();
+                this.computersTurn = false;
+                this.usersTurn = true;
+            }
+            while (this.usersTurn){
+                this.user.play(this.computer.getPattern);
+            }
+        }
+    }
+}
+
+//simon = new Computer;
+//simon.runGame();
+//user = new User;
+//user.play(simon.getPattern);
 
