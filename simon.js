@@ -80,10 +80,14 @@ class User{
         });
 
         yellowButton.addEventListener('click', async ()=> {
-            yellowButton.style.background = 'yellow';
-            this.pattern.push(3);
-            await this.sleep(1000);
-            yellowButton.style.background = '#B58B00';
+            if (!this.isAButtonOn){
+                this.isAButtonOn = true;
+                yellowButton.style.background = 'yellow';
+                this.pattern.push(3);
+                await this.sleep(1000);
+                yellowButton.style.background = '#B58B00';
+            }
+            this.isAButtonOn = false;
         });
 
         blueButton.addEventListener('click', async ()=> {
