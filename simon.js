@@ -50,6 +50,7 @@ class Computer {
 class User{
     pattern = [];
 
+    continue = false;
     isAButtonOn = false;
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -57,7 +58,7 @@ class User{
 
     comparePattern(computersPattern){
         for (let i = 0; i < computersPattern.length; i++){
-            console.log(computersPattern[i] + '==> ' +this.pattern[i]);
+            console.log(computersPattern[i] + ' ==> ' +this.pattern[i]);
             if (computersPattern[i] !== this.pattern[i]){
                 return false;
             }
@@ -65,13 +66,13 @@ class User{
         return true;
     }
 
-    play(computersPattern){
-        greenButton.addEventListener('click', async () => {
+    /*async play(computersPattern){
+        greenButton.addEventListener('click',  () => {
             if(!this.isAButtonOn){
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
                 this.pattern.push(1);
-                await this.sleep(1000);
+                this.sleep(1000);
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
@@ -109,7 +110,8 @@ class User{
             }
             this.isAButtonOn = false;
         });
-    }
+        return this.comparePattern(computersPattern)
+    }*/
 }
 
 class Simon{
@@ -118,21 +120,27 @@ class Simon{
         this.computer = new Computer();
         this.user = new User();
     }
-    gameOver = false;
+    playing = true;
     computersTurn = true;
     usersTurn = false;
 
-    startGame(){
-        while(!this.gameOver){
-            while (this.computersTurn){
-                this.computer.runGame();
+    sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async startGame() {
+        while (this.playing) {
+            while (this.computersTurn) {
+                await this.computer.runGame();
+                console.log('Ran computer')
                 this.computersTurn = false;
+                console.log('computer ended')
                 this.usersTurn = true;
+                console.log('user is enabled')
             }
-            while (this.usersTurn){
-                this.user.play(this.computer.getPattern);
-            }
+
         }
+        console.log('Game Over')
     }
 }
 
@@ -141,3 +149,5 @@ class Simon{
 //user = new User;
 //user.play(simon.getPattern);
 
+simon = new Simon();
+simon.startGame().then(r => console.log('nah'));
