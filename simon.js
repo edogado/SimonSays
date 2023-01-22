@@ -66,13 +66,13 @@ class User{
         return true;
     }
 
-    /*async play(computersPattern){
-        greenButton.addEventListener('click',  () => {
+    async play(computersPattern){
+        greenButton.addEventListener('click',  async () => {
             if(!this.isAButtonOn){
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
                 this.pattern.push(1);
-                this.sleep(1000);
+                await this.sleep(1000);
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
@@ -111,7 +111,7 @@ class User{
             this.isAButtonOn = false;
         });
         return this.comparePattern(computersPattern)
-    }*/
+    }
 }
 
 class Simon{
@@ -129,18 +129,13 @@ class Simon{
     }
 
     async startGame() {
-        while (this.playing) {
-            while (this.computersTurn) {
-                await this.computer.runGame();
-                console.log('Ran computer')
-                this.computersTurn = false;
-                console.log('computer ended')
-                this.usersTurn = true;
-                console.log('user is enabled')
-            }
-
-        }
-        console.log('Game Over')
+        await this.computer.runGame();
+        console.log('Ran computer')
+        this.computersTurn = false;
+        console.log('computer ended')
+        this.usersTurn = true;
+        console.log('user is enabled')
+        await this.user.play(this.computer.getPattern);
     }
 }
 
@@ -150,4 +145,4 @@ class Simon{
 //user.play(simon.getPattern);
 
 simon = new Simon();
-simon.startGame().then(r => console.log('nah'));
+simon.startGame();
