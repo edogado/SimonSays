@@ -1,4 +1,3 @@
-let score  = document.getElementById('score');
 const greenButton = document.getElementById('green');
 const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
@@ -49,77 +48,6 @@ class Computer {
 
 class User{
     pattern = [];
-
-    continue = false;
-    isAButtonOn = false;
-    sleep(ms){
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    comparePattern(computersPattern){
-        for (let i = 0; i < computersPattern.length; i++){
-            console.log(computersPattern[i] + ' ==> ' +this.pattern[i]);
-            if (computersPattern[i] !== this.pattern[i]){
-                console.log('wrong button')
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /*async play(computersPattern){
-        let rightPattern;
-
-        await greenButton.addEventListener('click',  async () => {
-            if(!this.isAButtonOn){
-                this.isAButtonOn = true;
-                greenButton.style.background = 'limegreen';
-                this.pattern.push(1);
-                await this.sleep(1000);
-                greenButton.style.background = 'darkgreen';
-            }
-            this.isAButtonOn = false;
-            rightPattern = this.comparePattern(computersPattern);
-        });
-
-        await redButton.addEventListener('click', async () => {
-            if (!this.isAButtonOn) {
-                this.isAButtonOn = true;
-                redButton.style.background = 'red';
-                this.pattern.push(2);
-                await this.sleep(1000);
-                redButton.style.background = 'darkred';
-            }
-            this.isAButtonOn = false;
-            rightPattern = this.comparePattern(computersPattern);
-        });
-
-        await yellowButton.addEventListener('click', async ()=> {
-            if (!this.isAButtonOn){
-                this.isAButtonOn = true;
-                yellowButton.style.background = 'yellow';
-                this.pattern.push(3);
-                await this.sleep(1000);
-                yellowButton.style.background = '#B58B00';
-            }
-            this.isAButtonOn = false;
-            rightPattern = this.comparePattern(computersPattern);
-        });
-
-        await blueButton.addEventListener('click', async ()=> {
-            if (!this.isAButtonOn){
-                this.isAButtonOn = true;
-                blueButton.style.background = 'blue';
-                this.pattern.push(4);
-                await this.sleep(1000);
-                blueButton.style.background = 'darkblue';
-            }
-            this.isAButtonOn = false;
-            rightPattern = this.comparePattern(computersPattern);
-        });
-
-        return rightPattern;
-    }*/
 }
 
 class Simon{
@@ -128,15 +56,14 @@ class Simon{
         this.computer = new Computer();
         this.user = new User();
     }
-    playing = true;
-    computersTurn = true;
-    usersTurn = false;
-    computer = new Computer();
-    user = new User();
-    continueGame = false;
+
+    gameOver = false;
 
     async startGame() {
+        //if (this.gameOver) return;
         await this.computer.runGame();
+        let expectedColors = [...this.computer.getPattern]
+        console.log('Expected colors: ', expectedColors);
 
         console.log('users turn')
         greenButton.addEventListener('click', async () => {
@@ -147,11 +74,15 @@ class Simon{
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
-            this.continueGame = this.user.comparePattern(this.computer.getPattern);
-            if (this.continueGame) {
-                await this.startGame()
-            } else {
-                console.log('game over')
+            let expectedColor = expectedColors.shift();
+            if (expectedColor){
+                if (expectedColors.length === 0){
+                    await this.startGame();
+                }
+            }
+            else{
+                console.log('game over green')
+                this.gameOver = true;
             }
         });
 
@@ -163,11 +94,15 @@ class Simon{
                 redButton.style.background = 'darkred';
             }
             this.isAButtonOn = false;
-            this.continueGame = this.user.comparePattern(this.computer.getPattern);
-            if (this.continueGame) {
-                await this.startGame();
-            } else {
-                console.log('game over')
+            let expectedColor = expectedColors.shift();
+            if (expectedColor===2){
+                if (expectedColors.length === 0){
+                    await this.startGame();
+                }
+            }
+            else{
+                console.log('game over red')
+                this.gameOver = true;
             }
         });
 
@@ -179,11 +114,15 @@ class Simon{
                 yellowButton.style.background = '#B58B00';
             }
             this.isAButtonOn = false;
-            this.continueGame = this.user.comparePattern(this.computer.getPattern);
-            if (this.continueGame) {
-                await this.startGame()
-            } else {
-                console.log('game over')
+            let expectedColor = expectedColors.shift();
+            if (expectedColor===3){
+                if (expectedColors.length === 0){
+                    await this.startGame();
+                }
+            }
+            else{
+                console.log('game over yellow')
+                this.gameOver = true;
             }
         });
 
@@ -195,21 +134,21 @@ class Simon{
                 blueButton.style.background = 'darkblue';
             }
             this.isAButtonOn = false;
-            this.continueGame = this.user.comparePattern(this.computer.getPattern);
-            if (this.continueGame) {
-                await this.startGame()
-            } else {
-                console.log("game over")
+            let expectedColor = expectedColors.shift();
+            if (expectedColor===4){
+                if (expectedColors.length === 0){
+                    await this.startGame();
+                }
+            }
+            else{
+                console.log('game over blue')
+                this.gameOver = true;
             }
         });
 
     }
 }
 
-//simon = new Computer;
-//simon.runGame();
-//user = new User;
-//user.play(simon.getPattern);
 
 simon = new Simon();
 simon.startGame().then(r => {});
