@@ -58,18 +58,16 @@ class Simon{
     }
 
     gameOver = false;
-    colorExpected;
 
     async startGame() {
         if (this.gameOver) return;
         await this.computer.runGame();
         let expectedColors = [...this.computer.getPattern];
+        let colorToCurrentlyGuess;
         console.log('Expected colors: ', expectedColors);
 
         console.log('users turn')
         greenButton.addEventListener('click', async () => {
-            this.colorExpected = expectedColors.shift();
-            console.log('Color expected from green outer: ', this.colorExpected);
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
@@ -77,7 +75,9 @@ class Simon{
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
-            if (this.colorExpected === 1){
+            colorToCurrentlyGuess = expectedColors.shift();
+            console.log('Color expected from green: ', colorToCurrentlyGuess);
+            if (colorToCurrentlyGuess === 1){
                 if (expectedColors.length === 0){
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -87,14 +87,12 @@ class Simon{
             }
             else{
                 console.log('game over green');
-                console.log('Color expected from green inner: ', this.colorExpected);
+                console.log('Color expected from green: ', colorToCurrentlyGuess);
                 this.gameOver = true;
             }
         });
 
         redButton.addEventListener('click', async () => {
-            this.expectedColor = expectedColors.shift();
-            console.log('Color expected: ', this.expectedColor);
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 redButton.style.background = 'red';
@@ -102,7 +100,9 @@ class Simon{
                 redButton.style.background = 'darkred';
             }
             this.isAButtonOn = false;
-            if (this.expectedColor===2){
+            colorToCurrentlyGuess = expectedColors.shift();
+            console.log('Color expected from red: ', colorToCurrentlyGuess);
+            if (colorToCurrentlyGuess===2){
                 if (expectedColors.length === 0){
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -112,7 +112,7 @@ class Simon{
             }
             else{
                 console.log('game over red');
-                console.log('Color expected: ', this.expectedColor);
+                console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
             }
         });
@@ -125,9 +125,9 @@ class Simon{
                 yellowButton.style.background = '#B58B00';
             }
             this.isAButtonOn = false;
-            this.expectedColor = expectedColors.shift();
-            console.log('Color expected: ', this.expectedColor);
-            if (this.expectedColor===3){
+            colorToCurrentlyGuess = expectedColors.shift();
+            console.log('Color expected from yellow: ', colorToCurrentlyGuess);
+            if (colorToCurrentlyGuess===3){
                 if (expectedColors.length === 0){
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -137,7 +137,7 @@ class Simon{
             }
             else{
                 console.log('game over yellow');
-                console.log('Color expected: ', this.expectedColor);
+                console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
             }
         });
@@ -150,9 +150,9 @@ class Simon{
                 blueButton.style.background = 'darkblue';
             }
             this.isAButtonOn = false;
-            this.expectedColor = expectedColors.shift();
-            console.log('Color expected: ', this.expectedColor);
-            if (this.expectedColor===4){
+            colorToCurrentlyGuess = expectedColors.shift();
+            console.log('Color expected from blue: ', colorToCurrentlyGuess);
+            if (colorToCurrentlyGuess===4){
                 if (expectedColors.length === 0){
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -162,7 +162,7 @@ class Simon{
             }
             else{
                 console.log('game over blue');
-                console.log('Color expected: ', this.expectedColor);
+                console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
             }
         });
@@ -172,4 +172,4 @@ class Simon{
 
 
 simon = new Simon();
-simon.startGame().then(r => {console.log(r)});
+simon.startGame().then(r => '');
