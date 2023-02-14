@@ -61,7 +61,7 @@ class Simon{
     colorExpected;
 
     async startGame() {
-        //if (this.gameOver) return;
+        if (this.gameOver) return;
         await this.computer.runGame();
         let expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', expectedColors);
@@ -172,4 +172,4 @@ class Simon{
 
 
 simon = new Simon();
-simon.startGame().then(r => {});
+simon.startGame().then(r => {console.log(r)});
