@@ -58,15 +58,18 @@ class Simon{
     }
 
     gameOver = false;
+    colorExpected;
 
     async startGame() {
         //if (this.gameOver) return;
         await this.computer.runGame();
-        let expectedColors = [...this.computer.getPattern]
+        let expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', expectedColors);
 
         console.log('users turn')
         greenButton.addEventListener('click', async () => {
+            this.colorExpected = expectedColors.shift();
+            console.log('Color expected from green outer: ', this.colorExpected);
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
@@ -74,19 +77,24 @@ class Simon{
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
-            let expectedColor = expectedColors.shift();
-            if (expectedColor){
+            if (this.colorExpected === 1){
                 if (expectedColors.length === 0){
-                    await this.startGame();
+                    await this.computer.runGame();
+                    expectedColors = [...this.computer.getPattern];
+                    console.log('Expected colors: ', expectedColors);
+                    console.log('users turn')
                 }
             }
             else{
-                console.log('game over green')
+                console.log('game over green');
+                console.log('Color expected from green inner: ', this.colorExpected);
                 this.gameOver = true;
             }
         });
 
         redButton.addEventListener('click', async () => {
+            this.expectedColor = expectedColors.shift();
+            console.log('Color expected: ', this.expectedColor);
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 redButton.style.background = 'red';
@@ -94,14 +102,17 @@ class Simon{
                 redButton.style.background = 'darkred';
             }
             this.isAButtonOn = false;
-            let expectedColor = expectedColors.shift();
-            if (expectedColor===2){
+            if (this.expectedColor===2){
                 if (expectedColors.length === 0){
-                    await this.startGame();
+                    await this.computer.runGame();
+                    expectedColors = [...this.computer.getPattern];
+                    console.log('Expected colors: ', expectedColors);
+                    console.log('users turn')
                 }
             }
             else{
-                console.log('game over red')
+                console.log('game over red');
+                console.log('Color expected: ', this.expectedColor);
                 this.gameOver = true;
             }
         });
@@ -114,14 +125,19 @@ class Simon{
                 yellowButton.style.background = '#B58B00';
             }
             this.isAButtonOn = false;
-            let expectedColor = expectedColors.shift();
-            if (expectedColor===3){
+            this.expectedColor = expectedColors.shift();
+            console.log('Color expected: ', this.expectedColor);
+            if (this.expectedColor===3){
                 if (expectedColors.length === 0){
-                    await this.startGame();
+                    await this.computer.runGame();
+                    expectedColors = [...this.computer.getPattern];
+                    console.log('Expected colors: ', expectedColors);
+                    console.log('users turn')
                 }
             }
             else{
-                console.log('game over yellow')
+                console.log('game over yellow');
+                console.log('Color expected: ', this.expectedColor);
                 this.gameOver = true;
             }
         });
@@ -134,14 +150,19 @@ class Simon{
                 blueButton.style.background = 'darkblue';
             }
             this.isAButtonOn = false;
-            let expectedColor = expectedColors.shift();
-            if (expectedColor===4){
+            this.expectedColor = expectedColors.shift();
+            console.log('Color expected: ', this.expectedColor);
+            if (this.expectedColor===4){
                 if (expectedColors.length === 0){
-                    await this.startGame();
+                    await this.computer.runGame();
+                    expectedColors = [...this.computer.getPattern];
+                    console.log('Expected colors: ', expectedColors);
+                    console.log('users turn')
                 }
             }
             else{
-                console.log('game over blue')
+                console.log('game over blue');
+                console.log('Color expected: ', this.expectedColor);
                 this.gameOver = true;
             }
         });
