@@ -50,7 +50,6 @@ class Simon{
 
     constructor() {
         this.computer = new Computer();
-        this.user = new User();
     }
 
     gameOver = false;
