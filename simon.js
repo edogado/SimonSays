@@ -46,10 +46,6 @@ class Computer {
     }
 }
 
-class User{
-    pattern = [];
-}
-
 class Simon{
 
     constructor() {
