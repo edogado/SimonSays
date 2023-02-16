@@ -98,10 +98,7 @@ class Simon{
         redButton.addEventListener('click', async () => {
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
-
-                redButton.style.background = 'red';
-                await this.sleep(500);
-                redButton.style.background = 'darkred';
+                await this.turnButtonOnAndOff(redButton, 'darkred', 'red');
             }
             this.isAButtonOn = false;
             colorToCurrentlyGuess = expectedColors.shift();
@@ -124,9 +121,7 @@ class Simon{
         yellowButton.addEventListener('click', async () => {
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
-                yellowButton.style.background = 'yellow';
-                await this.sleep(500);
-                yellowButton.style.background = '#B58B00';
+                await this.turnButtonOnAndOff(yellowButton, '#B58B00', 'yellow');
             }
             this.isAButtonOn = false;
             colorToCurrentlyGuess = expectedColors.shift();
@@ -149,9 +144,7 @@ class Simon{
         blueButton.addEventListener('click', async () => {
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
-                blueButton.style.background = 'blue';
-                await this.sleep(500);
-                blueButton.style.background = 'darkblue';
+                await this.turnButtonOnAndOff(blueButton, 'darkblue', 'blue');
             }
             this.isAButtonOn = false;
             colorToCurrentlyGuess = expectedColors.shift();
