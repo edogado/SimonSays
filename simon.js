@@ -53,9 +53,16 @@ class Simon{
         this.gameOver = false;
     }
 
+    async turnButtonOnAndOff(button, offColor, onColor){
+        button.style.background = onColor;
+        await this.sleep(500);
+        button.style.background = offColor;
+    }
+
     sleep(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
 
     async startGame() {
         if (this.gameOver) return;
@@ -68,9 +75,7 @@ class Simon{
         greenButton.addEventListener('click', async () => {
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
-                greenButton.style.background = 'limegreen';
-                await this.sleep(500);
-                greenButton.style.background = 'darkgreen';
+                await this.turnButtonOnAndOff(greenButton, 'darkgreen', 'limegreen');
             }
             this.isAButtonOn = false;
             colorToCurrentlyGuess = expectedColors.shift();
@@ -93,6 +98,7 @@ class Simon{
         redButton.addEventListener('click', async () => {
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
+
                 redButton.style.background = 'red';
                 await this.sleep(500);
                 redButton.style.background = 'darkred';
