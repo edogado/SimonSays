@@ -53,6 +53,10 @@ class Simon{
         this.gameOver = false;
     }
 
+    sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     async startGame() {
         if (this.gameOver) return;
         await this.computer.runGame();
@@ -65,6 +69,7 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
+                await this.sleep(500);
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
@@ -89,6 +94,7 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 redButton.style.background = 'red';
+                await this.sleep(500);
                 redButton.style.background = 'darkred';
             }
             this.isAButtonOn = false;
@@ -113,6 +119,7 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 yellowButton.style.background = 'yellow';
+                await this.sleep(500);
                 yellowButton.style.background = '#B58B00';
             }
             this.isAButtonOn = false;
@@ -137,6 +144,7 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 blueButton.style.background = 'blue';
+                await this.sleep(500);
                 blueButton.style.background = 'darkblue';
             }
             this.isAButtonOn = false;
