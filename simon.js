@@ -170,4 +170,4 @@ class Simon{
 
 
 simon = new Simon();
-simon.startGame().then(r => '');
+simon.startGame().then();
