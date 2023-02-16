@@ -50,9 +50,8 @@ class Simon{
 
     constructor() {
         this.computer = new Computer();
+        this.gameOver = false;
     }
-
-    gameOver = false;
 
     async startGame() {
         if (this.gameOver) return;
@@ -66,7 +65,6 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 greenButton.style.background = 'limegreen';
-                this.user.pattern.push(1);
                 greenButton.style.background = 'darkgreen';
             }
             this.isAButtonOn = false;
@@ -91,7 +89,6 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 redButton.style.background = 'red';
-                this.user.pattern.push(2);
                 redButton.style.background = 'darkred';
             }
             this.isAButtonOn = false;
@@ -116,7 +113,6 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 yellowButton.style.background = 'yellow';
-                this.user.pattern.push(3);
                 yellowButton.style.background = '#B58B00';
             }
             this.isAButtonOn = false;
@@ -141,7 +137,6 @@ class Simon{
             if (!this.isAButtonOn) {
                 this.isAButtonOn = true;
                 blueButton.style.background = 'blue';
-                this.user.pattern.push(4);
                 blueButton.style.background = 'darkblue';
             }
             this.isAButtonOn = false;
