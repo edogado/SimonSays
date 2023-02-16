@@ -51,14 +51,9 @@ class Simon{
 
     async turnButtonOnAndOff(button, offColor, onColor){
         button.style.background = onColor;
-        await this.sleep(500);
+        await sleep(500);
         button.style.background = offColor;
     }
-
-    sleep(ms){
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
 
     async startGame() {
         if (this.gameOver) return;
