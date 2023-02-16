@@ -73,11 +73,9 @@ class Simon{
 
         console.log('users turn')
         greenButton.addEventListener('click', async () => {
-            if (!this.isAButtonOn) {
-                this.isAButtonOn = true;
-                await this.turnButtonOnAndOff(greenButton, 'darkgreen', 'limegreen');
-            }
-            this.isAButtonOn = false;
+            if (this.isAButtonOn) return;
+            this.isAButtonOn = true;
+            await this.turnButtonOnAndOff(greenButton, 'darkgreen', 'limegreen');
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from green: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess === 1){
@@ -87,11 +85,13 @@ class Simon{
                     console.log('Expected colors: ', expectedColors);
                     console.log('users turn')
                 }
+                this.isAButtonOn = false;
             }
             else{
                 console.log('game over green');
                 console.log('Color expected from green: ', colorToCurrentlyGuess);
                 this.gameOver = true;
+                this.isAButtonOn = true;
             }
         });
 
