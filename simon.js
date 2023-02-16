@@ -3,7 +3,7 @@ const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
 
-
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 class Computer {
     #pattern = []
     get getPattern(){
@@ -13,35 +13,31 @@ class Computer {
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
 
-    sleep (ms){
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
     async runGame(){
         this.createPattern();
-        await this.sleep(1000);
+        await sleep(1000);
         for (let i =0; i < this.#pattern.length; i++){
             if (this.#pattern[i] === 1){
                 greenButton.style.background = 'limegreen';
-                await this.sleep(1000);
+                await sleep(1000);
                 greenButton.style.background = 'darkgreen';
             }
             else if (this.#pattern[i] === 2) {
                 redButton.style.background = 'red';
-                await  this.sleep(1000);
+                await  sleep(1000);
                 redButton.style.background = 'darkred';
             }
             else if (this.#pattern[i] === 3){
                 yellowButton.style.background = 'yellow';
-                await this.sleep(1000);
+                await sleep(1000);
                 yellowButton.style.background = '#B58B00';
             }
             else if (this.#pattern[i] === 4){
                 blueButton.style.background = 'blue';
-                await this.sleep(1000);
+                await sleep(1000);
                 blueButton.style.background = 'darkblue';
             }
-            await this.sleep(1000);//pause btw lights in case we get the same button consecutively
+            await sleep(1000);//pause btw lights in case we get the same button consecutively
         }
     }
 }
@@ -96,11 +92,9 @@ class Simon{
         });
 
         redButton.addEventListener('click', async () => {
-            if (!this.isAButtonOn) {
-                this.isAButtonOn = true;
-                await this.turnButtonOnAndOff(redButton, 'darkred', 'red');
-            }
-            this.isAButtonOn = false;
+            if (this.isAButtonOn) return;
+            this.isAButtonOn = true;
+            await this.turnButtonOnAndOff(redButton, 'darkred', 'red');
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from red: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===2){
@@ -110,20 +104,20 @@ class Simon{
                     console.log('Expected colors: ', expectedColors);
                     console.log('users turn')
                 }
+                this.isAButtonOn = false;
             }
             else{
                 console.log('game over red');
                 console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
+                this.isAButtonOn = true;
             }
         });
 
         yellowButton.addEventListener('click', async () => {
-            if (!this.isAButtonOn) {
-                this.isAButtonOn = true;
-                await this.turnButtonOnAndOff(yellowButton, '#B58B00', 'yellow');
-            }
-            this.isAButtonOn = false;
+            if (this.isAButtonOn) return;
+            this.isAButtonOn = true;
+            await this.turnButtonOnAndOff(yellowButton, '#B58B00', 'yellow');
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from yellow: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===3){
@@ -133,20 +127,20 @@ class Simon{
                     console.log('Expected colors: ', expectedColors);
                     console.log('users turn')
                 }
+                this.isAButtonOn = false;
             }
             else{
                 console.log('game over yellow');
                 console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
+                this.isAButtonOn = true;
             }
         });
 
         blueButton.addEventListener('click', async () => {
-            if (!this.isAButtonOn) {
-                this.isAButtonOn = true;
-                await this.turnButtonOnAndOff(blueButton, 'darkblue', 'blue');
-            }
-            this.isAButtonOn = false;
+            if (this.isAButtonOn) return;
+            this.isAButtonOn = true;
+            await this.turnButtonOnAndOff(blueButton, 'darkblue', 'blue');
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from blue: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===4){
@@ -156,11 +150,13 @@ class Simon{
                     console.log('Expected colors: ', expectedColors);
                     console.log('users turn')
                 }
+                this.isAButtonOn = false;
             }
             else{
                 console.log('game over blue');
                 console.log('Color expected: ', colorToCurrentlyGuess);
                 this.gameOver = true;
+                this.isAButtonOn = true;
             }
         });
 
