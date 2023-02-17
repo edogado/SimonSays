@@ -3,7 +3,14 @@ const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
+    button.style.background = onColor;
+    await sleep(duration);
+    button.style.background = offColor;
+}
+
 class Computer {
     #pattern = []
     get getPattern(){
@@ -15,27 +22,19 @@ class Computer {
 
     async runGame(){
         this.createPattern();
-        await sleep(1000);
+        await sleep(1000);//gives the user 1 sec to get ready after the game starts
         for (let i =0; i < this.#pattern.length; i++){
             if (this.#pattern[i] === 1){
-                greenButton.style.background = 'limegreen';
-                await sleep(1000);
-                greenButton.style.background = 'darkgreen';
+                await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 1000);
             }
             else if (this.#pattern[i] === 2) {
-                redButton.style.background = 'red';
-                await  sleep(1000);
-                redButton.style.background = 'darkred';
+                await turnButtonOnAndOff(redButton, 'red', 'darkred', 1000);
             }
             else if (this.#pattern[i] === 3){
-                yellowButton.style.background = 'yellow';
-                await sleep(1000);
-                yellowButton.style.background = '#B58B00';
+                await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 1000);
             }
             else if (this.#pattern[i] === 4){
-                blueButton.style.background = 'blue';
-                await sleep(1000);
-                blueButton.style.background = 'darkblue';
+                await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 1000);
             }
             await sleep(1000);//pause btw lights in case we get the same button consecutively
         }
@@ -47,12 +46,7 @@ class Simon{
     constructor() {
         this.computer = new Computer();
         this.gameOver = false;
-    }
-
-    async turnButtonOnAndOff(button, offColor, onColor){
-        button.style.background = onColor;
-        await sleep(500);
-        button.style.background = offColor;
+        this.isAButtonOn = true;
     }
 
     async startGame() {
@@ -60,13 +54,14 @@ class Simon{
         await this.computer.runGame();
         let expectedColors = [...this.computer.getPattern];
         let colorToCurrentlyGuess;
+        this.isAButtonOn = false;
         console.log('Expected colors: ', expectedColors);
 
         console.log('users turn')
         greenButton.addEventListener('click', async () => {
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
-            await this.turnButtonOnAndOff(greenButton, 'darkgreen', 'limegreen');
+            await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from green: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess === 1){
@@ -89,7 +84,7 @@ class Simon{
         redButton.addEventListener('click', async () => {
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
-            await this.turnButtonOnAndOff(redButton, 'darkred', 'red');
+            await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from red: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===2){
@@ -112,7 +107,7 @@ class Simon{
         yellowButton.addEventListener('click', async () => {
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
-            await this.turnButtonOnAndOff(yellowButton, '#B58B00', 'yellow');
+            await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 500);
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from yellow: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===3){
@@ -135,7 +130,7 @@ class Simon{
         blueButton.addEventListener('click', async () => {
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
-            await this.turnButtonOnAndOff(blueButton, 'darkblue', 'blue');
+            await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 500);
             colorToCurrentlyGuess = expectedColors.shift();
             console.log('Color expected from blue: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===4){
