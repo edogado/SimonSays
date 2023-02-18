@@ -49,10 +49,12 @@ class Simon{
         this.computer = new Computer();
         this.gameOver = false;
         this.isAButtonOn = true;
+        this.points = 0;
     }
 
     async startGame() {
         if (this.gameOver) return;
+        score.innerText = '0';
         turn.innerText = "Simon's turn"
         await this.computer.runGame();
         let expectedColors = [...this.computer.getPattern];
@@ -70,6 +72,7 @@ class Simon{
             console.log('Color expected from green: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess === 1){
                 if (expectedColors.length === 0){
+                    score.innerText = `${++this.points}`;
                     turn.innerText = "Simon's turn"
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -95,6 +98,7 @@ class Simon{
             console.log('Color expected from red: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===2){
                 if (expectedColors.length === 0){
+                    score.innerText = `${++this.points}`;
                     turn.innerText = "Simon's turn";
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -120,6 +124,7 @@ class Simon{
             console.log('Color expected from yellow: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===3){
                 if (expectedColors.length === 0){
+                    score.innerText = `${++this.points}`;
                     turn.innerText = "Simon's turn"
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
@@ -145,6 +150,7 @@ class Simon{
             console.log('Color expected from blue: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===4){
                 if (expectedColors.length === 0){
+                    score.innerText = `${++this.points}`;
                     turn.innerText = "Simon's turn"
                     await this.computer.runGame();
                     expectedColors = [...this.computer.getPattern];
