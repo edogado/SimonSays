@@ -161,6 +161,6 @@ class Simon{
 document.addEventListener('DOMContentLoaded', ()=> {
     startGame.addEventListener('click', ()=> {
         const simon = new Simon();
-        simon.startGame().then();
+        simon.startGame();
     });
 });
