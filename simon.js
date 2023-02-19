@@ -12,6 +12,7 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
     let sound = new Audio(`clickSounds/${button.id}Button.wav`);
     await sound.play();
     await sleep(duration);
+    sound.pause();
     button.style.background = offColor;
 }
 
@@ -51,6 +52,7 @@ class Simon{
         this.gameOver = false;
         this.points = 0;
         this.expectedColors = [];
+        this.aButtonIsLit = false;
     }
 
     async continueGame() {
@@ -62,6 +64,12 @@ class Simon{
         console.log('users turn')
     }
 
+    gameIsOver(){
+        this.gameOver = true;
+        this.aButtonIsLit = true;
+        turn.innerText = 'Game Over';
+    }
+
     async startGame() {
         if (this.gameOver) return;
         score.innerText = '0';
@@ -69,14 +77,13 @@ class Simon{
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
         let colorToCurrentlyGuess;
-        let aButtonIsLit = false;
         console.log('Expected colors: ', this.expectedColors);
 
         console.log('users turn');
         turn.innerText = "Your turn";
         greenButton.addEventListener('click', async () => {
-            if (aButtonIsLit) return;
-            aButtonIsLit = true;
+            if (this.aButtonIsLit) return;
+            this.aButtonIsLit = true;
             await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from green: ', colorToCurrentlyGuess);
@@ -84,20 +91,17 @@ class Simon{
                 if (this.expectedColors.length === 0){
                     await this.continueGame();
                 }
-                aButtonIsLit = false;
+                this.aButtonIsLit = false;
                 turn.innerText = "Your turn";
             }
             else{
-                console.log('game over green');
-                console.log('Color expected from green: ', colorToCurrentlyGuess);
-                this.gameOver = true;
-                aButtonIsLit = true;
+                this.gameIsOver();
             }
         });
 
         redButton.addEventListener('click', async () => {
-            if (aButtonIsLit) return;
-            aButtonIsLit = true;
+            if (this.aButtonIsLit) return;
+            this.aButtonIsLit = true;
             await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from red: ', colorToCurrentlyGuess);
@@ -105,20 +109,17 @@ class Simon{
                 if (this.expectedColors.length === 0){
                     await this.continueGame();
                 }
-                aButtonIsLit = false;
+                this.aButtonIsLit = false;
                 turn.innerText = "Your turn";
             }
             else{
-                console.log('game over red');
-                console.log('Color expected: ', colorToCurrentlyGuess);
-                this.gameOver = true;
-                aButtonIsLit = true;
+                this.gameIsOver();
             }
         });
 
         yellowButton.addEventListener('click', async () => {
-            if (aButtonIsLit) return;
-            aButtonIsLit = true;
+            if (this.aButtonIsLit) return;
+            this.aButtonIsLit = true;
             await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from yellow: ', colorToCurrentlyGuess);
@@ -126,20 +127,17 @@ class Simon{
                 if (this.expectedColors.length === 0){
                     await this.continueGame();
                 }
-                aButtonIsLit = false;
+                this.aButtonIsLit = false;
                 turn.innerText = "Your turn";
             }
             else{
-                console.log('game over yellow');
-                console.log('Color expected: ', colorToCurrentlyGuess);
-                this.gameOver = true;
-                aButtonIsLit = true;
+               this.gameIsOver();
             }
         });
 
         blueButton.addEventListener('click', async () => {
-            if (aButtonIsLit) return;
-            aButtonIsLit = true;
+            if (this.aButtonIsLit) return;
+            this.aButtonIsLit = true;
             await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from blue: ', colorToCurrentlyGuess);
@@ -147,17 +145,13 @@ class Simon{
                 if (this.expectedColors.length === 0){
                     await this.continueGame();
                 }
-                aButtonIsLit = false;
+                this.aButtonIsLit = false;
                 turn.innerText = "Your turn";
             }
             else{
-                console.log('game over blue');
-                console.log('Color expected: ', colorToCurrentlyGuess);
-                this.gameOver = true;
-                aButtonIsLit = true;
+                this.gameIsOver();
             }
         });
-
     }
 }
 
