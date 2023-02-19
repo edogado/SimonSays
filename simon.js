@@ -9,6 +9,8 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
     button.style.background = onColor;
+    let sound = new Audio(`clickSounds/${button.id}Button.wav`);
+    await sound.play();
     await sleep(duration);
     button.style.background = offColor;
 }
@@ -21,7 +23,6 @@ class Computer {
     createPattern(){
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
-
     async runGame(){
         this.createPattern();
         await sleep(750);//gives the user 1 sec to get ready after the game starts
