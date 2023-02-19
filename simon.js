@@ -50,25 +50,27 @@ class Simon{
         this.gameOver = false;
         this.isAButtonOn = true;
         this.points = 0;
+        this.expectedColors = [];
     }
 
-    async continueGame(arr) {
+    async continueGame() {
         score.innerText = `${++this.points}`;
         turn.innerText = "Simon's turn"
         await this.computer.runGame();
-        arr = [...this.computer.getPattern];
-        console.log('Expected colors: ', arr);
+        this.expectedColors = [...this.computer.getPattern];
+        console.log('Expected colors: ', this.expectedColors);
         console.log('users turn')
     }
+
     async startGame() {
         if (this.gameOver) return;
         score.innerText = '0';
         turn.innerText = "Simon's turn"
         await this.computer.runGame();
-        let expectedColors = [...this.computer.getPattern];
+        this.expectedColors = [...this.computer.getPattern];
         let colorToCurrentlyGuess;
         this.isAButtonOn = false;
-        console.log('Expected colors: ', expectedColors);
+        console.log('Expected colors: ', this.expectedColors);
 
         console.log('users turn');
         turn.innerText = "Your turn";
@@ -76,16 +78,11 @@ class Simon{
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
             await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
-            colorToCurrentlyGuess = expectedColors.shift();
+            colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from green: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess === 1){
-                if (expectedColors.length === 0){
-                    score.innerText = `${++this.points}`;
-                    turn.innerText = "Simon's turn"
-                    await this.computer.runGame();
-                    expectedColors = [...this.computer.getPattern];
-                    console.log('Expected colors: ', expectedColors);
-                    console.log('users turn')
+                if (this.expectedColors.length === 0){
+                    await this.continueGame();
                 }
                 this.isAButtonOn = false;
                 turn.innerText = "Your turn";
@@ -102,16 +99,11 @@ class Simon{
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
             await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
-            colorToCurrentlyGuess = expectedColors.shift();
+            colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from red: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===2){
-                if (expectedColors.length === 0){
-                    score.innerText = `${++this.points}`;
-                    turn.innerText = "Simon's turn";
-                    await this.computer.runGame();
-                    expectedColors = [...this.computer.getPattern];
-                    console.log('Expected colors: ', expectedColors);
-                    console.log('users turn')
+                if (this.expectedColors.length === 0){
+                    await this.continueGame();
                 }
                 this.isAButtonOn = false;
                 turn.innerText = "Your turn";
@@ -128,16 +120,11 @@ class Simon{
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
             await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 500);
-            colorToCurrentlyGuess = expectedColors.shift();
+            colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from yellow: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===3){
-                if (expectedColors.length === 0){
-                    score.innerText = `${++this.points}`;
-                    turn.innerText = "Simon's turn"
-                    await this.computer.runGame();
-                    expectedColors = [...this.computer.getPattern];
-                    console.log('Expected colors: ', expectedColors);
-                    console.log('users turn')
+                if (this.expectedColors.length === 0){
+                    await this.continueGame();
                 }
                 this.isAButtonOn = false;
                 turn.innerText = "Your turn";
@@ -154,16 +141,11 @@ class Simon{
             if (this.isAButtonOn) return;
             this.isAButtonOn = true;
             await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 500);
-            colorToCurrentlyGuess = expectedColors.shift();
+            colorToCurrentlyGuess = this.expectedColors.shift();
             console.log('Color expected from blue: ', colorToCurrentlyGuess);
             if (colorToCurrentlyGuess===4){
-                if (expectedColors.length === 0){
-                    score.innerText = `${++this.points}`;
-                    turn.innerText = "Simon's turn"
-                    await this.computer.runGame();
-                    expectedColors = [...this.computer.getPattern];
-                    console.log('Expected colors: ', expectedColors);
-                    console.log('users turn')
+                if (this.expectedColors.length === 0){
+                    await this.continueGame();
                 }
                 this.isAButtonOn = false;
                 turn.innerText = "Your turn";
