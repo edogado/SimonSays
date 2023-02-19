@@ -4,6 +4,8 @@ const greenButton = document.getElementById('green');
 const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
+const startGame = document.getElementById('Play');
+
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -156,5 +158,9 @@ class Simon{
 }
 
 
-simon = new Simon();
-simon.startGame().then();
+document.addEventListener('DOMContentLoaded', ()=> {
+    startGame.addEventListener('click', ()=> {
+        const simon = new Simon();
+        simon.startGame().then();
+    });
+});
