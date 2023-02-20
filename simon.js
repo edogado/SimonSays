@@ -58,8 +58,8 @@ class Simon{
     }
 
     async continueGame() {
+        turn.innerText = "Simon's turn";
         score.innerText = `${++this.points}`;
-        turn.innerText = "Simon's turn"
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', this.expectedColors);
