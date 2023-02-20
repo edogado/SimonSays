@@ -4,7 +4,7 @@ const greenButton = document.getElementById('green');
 const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
 const blueButton = document.getElementById('blue');
-const startGame = document.getElementById('play');
+const startGame = document.getElementById('start');
 
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
