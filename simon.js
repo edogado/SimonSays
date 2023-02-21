@@ -159,7 +159,9 @@ class Simon{
 
 
 document.addEventListener('DOMContentLoaded', ()=> {
+    turn.classList.add('turn-blinking');
     startGame.addEventListener('click', ()=> {
+        turn.classList.remove('turn-blinking');
         const simon = new Simon();
         simon.startGame().then();
     });
