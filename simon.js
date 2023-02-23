@@ -63,7 +63,6 @@ class Simon{
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', this.expectedColors);
-        console.log('users turn')
     }
 
     gameIsOver(){
@@ -81,7 +80,6 @@ class Simon{
         let colorToCurrentlyGuess;
         console.log('Expected colors: ', this.expectedColors);
 
-        console.log('users turn');
         turn.innerText = "Your turn";
         greenButton.addEventListener('click', async () => {
             if (this.aButtonIsLit) return;
