@@ -14,7 +14,6 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
     let sound = new Audio(`clickSounds/${button.id}Button.wav`);
     await sound.play();
     await sleep(duration);
-    sound.pause();
     button.style.background = offColor;
 }
 
