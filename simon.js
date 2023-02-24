@@ -72,6 +72,9 @@ class Simon{
     }
 
     async startGame() {
+        restartGame.classList.remove('invisibleButton');
+        endGame.classList.remove('invisibleButton');
+        startGame.classList.add('invisibleButton');
         if (this.gameOver) return;
         score.innerText = '0';
         turn.innerText = "Simon's turn"
@@ -160,6 +163,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     turn.classList.add('turn-blinking');
     restartGame.classList.add('invisibleButton');
     endGame.classList.add('invisibleButton');
+
     startGame.addEventListener('click', ()=> {
         turn.classList.remove('turn-blinking');
         const simon = new Simon();
