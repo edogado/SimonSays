@@ -121,7 +121,7 @@ button{
     cursor: pointer;
 }
 
-#start:active {
+button:active {
     box-shadow: none;
     position: relative;
     top: .2em;
