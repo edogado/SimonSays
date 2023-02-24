@@ -19,7 +19,11 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
 }
 
 class Computer {
-    #pattern = []
+    #pattern = [];
+
+    restartPattern(){
+        this.#pattern = [];
+    }
     get getPattern(){
         return this.#pattern;
     }
@@ -157,7 +161,6 @@ class Simon{
         });
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', ()=> {
     turn.classList.add('turn-blinking');
