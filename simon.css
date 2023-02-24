@@ -106,7 +106,7 @@ body{
     border-radius: 0 0 100% 0;
 }
 
-#start{
+button{
     text-align: center;
     display: inline-block;
     margin: 25px;
