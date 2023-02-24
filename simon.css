@@ -127,3 +127,7 @@ button:active {
     top: .2em;
 }
 
+.invisibleButton{
+    display: none;
+}
+
