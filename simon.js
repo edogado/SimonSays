@@ -160,16 +160,32 @@ class Simon{
             }
         });
     }
+
+    async restart(){
+        this.computer.restartPattern();
+        this.gameOver = false;
+        this.points = 0;
+        score.innerText = '0';
+        this.expectedColors = [];
+        this.aButtonIsLit = false;
+        turn.innerText = "Simon's turn";
+        await this.computer.runGame();
+        this.expectedColors = [...this.computer.getPattern];
+        turn.innerText = "Your turn";
+    }
 }
 
 document.addEventListener('DOMContentLoaded', ()=> {
     turn.classList.add('turn-blinking');
     restartGame.classList.add('invisibleButton');
     endGame.classList.add('invisibleButton');
+    let simon;
 
     startGame.addEventListener('click', ()=> {
         turn.classList.remove('turn-blinking');
-        const simon = new Simon();
+        simon = new Simon();
         simon.startGame().then();
     });
+
+    restartGame.addEventListener('click', ()=> simon.restart());
 });
