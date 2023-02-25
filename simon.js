@@ -20,6 +20,7 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
 
 class Computer {
     #pattern = [];
+    gameOver = false;
 
     restartPattern(){
         this.#pattern = [];
@@ -31,9 +32,11 @@ class Computer {
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
     async runGame(){
+        if (this.gameOver) return;
         this.createPattern();
         await sleep(750);//gives the user 1 sec to get ready after the game starts
         for (let i =0; i < this.#pattern.length; i++){
+            if (this.gameOver) break;
             if (this.#pattern[i] === 1){
                 await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 750);
             }
@@ -46,8 +49,13 @@ class Computer {
             else if (this.#pattern[i] === 4){
                 await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 750);
             }
-            await sleep(750);//pause btw lights in case we get the same button consecutively
+            await sleep(300);//pause btw lights in case we get the same button consecutively
         }
+    }
+
+    stopGame(){
+        this.gameOver = true;
+        this.restartPattern();
     }
 }
 
@@ -67,12 +75,14 @@ class Simon{
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', this.expectedColors);
+        if (!this.computer.gameOver) turn.innerText = "Your turn";
     }
 
     gameIsOver(){
         this.gameOver = true;
         this.aButtonIsLit = true;
         turn.innerText = 'Game Over';
+        this.computer.stopGame();
     }
 
     async startGame() {
@@ -89,7 +99,7 @@ class Simon{
 
         turn.innerText = "Your turn";
         greenButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit) return;
+            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -99,7 +109,6 @@ class Simon{
                     await this.continueGame();
                 }
                 this.aButtonIsLit = false;
-                turn.innerText = "Your turn";
             }
             else{
                 this.gameIsOver();
@@ -107,7 +116,7 @@ class Simon{
         });
 
         redButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit) return;
+            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -117,7 +126,6 @@ class Simon{
                     await this.continueGame();
                 }
                 this.aButtonIsLit = false;
-                turn.innerText = "Your turn";
             }
             else{
                 this.gameIsOver();
@@ -125,7 +133,7 @@ class Simon{
         });
 
         yellowButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit) return;
+            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -135,7 +143,6 @@ class Simon{
                     await this.continueGame();
                 }
                 this.aButtonIsLit = false;
-                turn.innerText = "Your turn";
             }
             else{
                this.gameIsOver();
@@ -143,7 +150,7 @@ class Simon{
         });
 
         blueButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit) return;
+            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -153,7 +160,6 @@ class Simon{
                     await this.continueGame();
                 }
                 this.aButtonIsLit = false;
-                turn.innerText = "Your turn";
             }
             else{
                 this.gameIsOver();
@@ -163,6 +169,7 @@ class Simon{
 
     async restart(){
         this.computer.restartPattern();
+        this.computer.gameOver = false;
         this.gameOver = false;
         this.points = 0;
         score.innerText = '0';
@@ -188,4 +195,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
 
     restartGame.addEventListener('click', ()=> simon.restart());
+
+    endGame.addEventListener('click', ()=> {
+      simon.gameIsOver();
+    });
 });
