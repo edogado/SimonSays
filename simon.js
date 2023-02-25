@@ -25,12 +25,15 @@ class Computer {
     restartPattern(){
         this.#pattern = [];
     }
+
     get getPattern(){
         return this.#pattern;
     }
+
     createPattern(){
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
+
     async runGame(){
         if (this.gameOver) return;
         this.createPattern();
