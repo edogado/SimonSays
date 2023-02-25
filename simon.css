@@ -106,6 +106,13 @@ body{
     border-radius: 0 0 100% 0;
 }
 
+#controller{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+}
+
 button{
     text-align: center;
     display: inline-block;
