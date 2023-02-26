@@ -1,5 +1,7 @@
 let turn = document.getElementById('turn');
 let score = document.getElementById('score');
+let bestScore = document.getElementById('bestScore');
+const bestScoreContainer = document.getElementById('bestScore-container');
 const greenButton = document.getElementById('green');
 const redButton = document.getElementById('red');
 const yellowButton = document.getElementById('yellow');
@@ -74,6 +76,10 @@ class Simon{
     async continueGame() {
         turn.innerText = "Simon's turn";
         score.innerText = `${++this.points}`;
+        if (bestScore.innerText === '' || parseInt(bestScore.innerText) < this.points){
+            bestScore.innerText = this.points;
+            bestScoreContainer.style.display = 'block';
+        }
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
         console.log('Expected colors: ', this.expectedColors);
