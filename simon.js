@@ -81,7 +81,6 @@ class Simon{
     }
 
     gameIsOver(){
-        this.gameOver = true;
         this.aButtonIsLit = true;
         turn.innerText = 'Game Over';
         this.computer.stopGame();
@@ -137,7 +136,6 @@ class Simon{
     async restart(){
         this.computer.restartPattern();
         this.computer.gameOver = false;
-        this.gameOver = false;
         this.points = 0;
         score.innerText = '0';
         this.expectedColors = [];
@@ -163,7 +161,5 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     restartGame.addEventListener('click', ()=> simon.restart());
 
-    endGame.addEventListener('click', ()=> {
-      simon.gameIsOver();
-    });
+    endGame.addEventListener('click', ()=> { simon.gameIsOver();});
 });
