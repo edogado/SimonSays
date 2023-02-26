@@ -30,6 +30,23 @@ body{
     -webkit-animation: blinking 1s steps(5, start) infinite;
 }
 
+#scores-container{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 450px;
+    min-height: 50px;
+}
+
+#score, #bestScore{
+    padding: 40px 0;
+}
+
+h3:last-child{
+    display: none;
+}
+
 #game-container{
     width: 450px;
     height: 450px;
