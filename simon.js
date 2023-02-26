@@ -111,7 +111,6 @@ class Simon{
         endGame.classList.remove('invisibleButton');
         startGame.classList.add('invisibleButton');
 
-        if (this.gameOver) return;
         score.innerText = '0';
         turn.innerText = "Simon's turn"
         await this.computer.runGame();
