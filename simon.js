@@ -88,6 +88,10 @@ class Simon{
         this.computer.stopGame();
     }
 
+    buttonHandler(){
+
+    }
+
     async startGame() {
         restartGame.classList.remove('invisibleButton');
         endGame.classList.remove('invisibleButton');
