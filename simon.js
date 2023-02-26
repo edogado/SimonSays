@@ -120,73 +120,19 @@ class Simon{
 
         turn.innerText = "Your turn";
         greenButton.addEventListener('click', async () => {
-            /*if (this.aButtonIsLit || this.expectedColors.length === 0) return;
-            this.aButtonIsLit = true;
-            await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
-            colorToCurrentlyGuess = this.expectedColors.shift();
-            console.log('Color expected from green: ', colorToCurrentlyGuess);
-            if (colorToCurrentlyGuess === 1){
-                if (this.expectedColors.length === 0){
-                    await this.continueGame();
-                }
-                this.aButtonIsLit = false;
-            }
-            else{
-                this.gameIsOver();
-            }*/
             await this.buttonHandler(greenButton, 'limegreen', 'darkgreen', 1);
         });
 
         redButton.addEventListener('click', async () => {
-            /*if (this.aButtonIsLit || this.expectedColors.length === 0) return;
-            this.aButtonIsLit = true;
-            await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
-            colorToCurrentlyGuess = this.expectedColors.shift();
-            console.log('Color expected from red: ', colorToCurrentlyGuess);
-            if (colorToCurrentlyGuess===2){
-                if (this.expectedColors.length === 0){
-                    await this.continueGame();
-                }
-                this.aButtonIsLit = false;
-            }
-            else{
-                this.gameIsOver();
-            }*/
             await this.buttonHandler(redButton, 'red', 'darkred', 2);
         });
 
         yellowButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
-            this.aButtonIsLit = true;
-            await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 500);
-            colorToCurrentlyGuess = this.expectedColors.shift();
-            console.log('Color expected from yellow: ', colorToCurrentlyGuess);
-            if (colorToCurrentlyGuess===3){
-                if (this.expectedColors.length === 0){
-                    await this.continueGame();
-                }
-                this.aButtonIsLit = false;
-            }
-            else{
-               this.gameIsOver();
-            }
+            await this.buttonHandler(yellowButton, 'yellow', '#b58b00', 3);
         });
 
         blueButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
-            this.aButtonIsLit = true;
-            await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 500);
-            colorToCurrentlyGuess = this.expectedColors.shift();
-            console.log('Color expected from blue: ', colorToCurrentlyGuess);
-            if (colorToCurrentlyGuess===4){
-                if (this.expectedColors.length === 0){
-                    await this.continueGame();
-                }
-                this.aButtonIsLit = false;
-            }
-            else{
-                this.gameIsOver();
-            }
+            await this.buttonHandler(blueButton, 'blue', 'darkblue', 4);
         });
     }
 
