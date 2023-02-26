@@ -115,7 +115,6 @@ class Simon{
         turn.innerText = "Simon's turn"
         await this.computer.runGame();
         this.expectedColors = [...this.computer.getPattern];
-        let colorToCurrentlyGuess;
         console.log('Expected colors: ', this.expectedColors);
 
         turn.innerText = "Your turn";
