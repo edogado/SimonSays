@@ -88,8 +88,22 @@ class Simon{
         this.computer.stopGame();
     }
 
-    buttonHandler(){
+    async buttonHandler(button, onColor, offColor, buttonNumber) {
+        if (this.aButtonIsLit || this.expectedColors.length === 0) return;
+        this.aButtonIsLit = true;
+        await turnButtonOnAndOff(button, onColor, offColor, 500);
+        let colorToCurrentlyGuess = this.expectedColors.shift();
+        console.log('Color expected: ', colorToCurrentlyGuess);
 
+        if (colorToCurrentlyGuess === buttonNumber){
+            if (this.expectedColors.length === 0) {
+                await this.continueGame();
+            }
+            this.aButtonIsLit = false;
+        }
+        else {
+            this.gameIsOver();
+        }
     }
 
     async startGame() {
@@ -107,7 +121,7 @@ class Simon{
 
         turn.innerText = "Your turn";
         greenButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
+            /*if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -120,11 +134,12 @@ class Simon{
             }
             else{
                 this.gameIsOver();
-            }
+            }*/
+            await this.buttonHandler(greenButton, 'limegreen', 'darkgreen', 1);
         });
 
         redButton.addEventListener('click', async () => {
-            if (this.aButtonIsLit || this.expectedColors.length === 0) return;
+            /*if (this.aButtonIsLit || this.expectedColors.length === 0) return;
             this.aButtonIsLit = true;
             await turnButtonOnAndOff(redButton, 'red', 'darkred', 500);
             colorToCurrentlyGuess = this.expectedColors.shift();
@@ -137,7 +152,8 @@ class Simon{
             }
             else{
                 this.gameIsOver();
-            }
+            }*/
+            await this.buttonHandler(redButton, 'red', 'darkred', 2);
         });
 
         yellowButton.addEventListener('click', async () => {
