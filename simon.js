@@ -66,7 +66,6 @@ class Simon{
 
     constructor() {
         this.computer = new Computer();
-        this.gameOver = false;
         this.points = 0;
         this.expectedColors = [];
         this.aButtonIsLit = false;
