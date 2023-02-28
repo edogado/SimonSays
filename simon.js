@@ -12,10 +12,12 @@ const endGame = document.getElementById('end');
 
 /*----------------------------------------------------------------------------------------------------------------------
 Sleep method returns a promise which when fulfilled, runs a now-asynchronous setTimeout. The program stops and awaits
-the setTimeout to finish and then proceeds with pending code.
- */
+the setTimeout to finish and then proceeds with pending code.*/
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+/*----------------------------------------------------------------------------------------------------------------------
+TurnButtonOnAndOff changes the color of a button to a brighter color for a brief period of time.
+The program stops for a set amount of time to eventually change the color back to its original darker color.*/
 const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
     button.style.background = onColor;
     let sound = new Audio(`clickSounds/${button.id}Button.wav`);
