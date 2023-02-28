@@ -27,6 +27,8 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
     button.style.background = offColor;//set the button color back to its original.
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+The computer class handles everything related to the color sequences for the game. */
 class Computer {
     #pattern = [];
     gameOver = false;
