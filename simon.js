@@ -10,6 +10,10 @@ const startGame = document.getElementById('start');
 const restartGame = document.getElementById('restart');
 const endGame = document.getElementById('end');
 
+/*----------------------------------------------------------------------------------------------------------------------
+Sleep method returns a promise which when fulfilled, runs a now-asynchronous setTimeout. The program stops and awaits
+the setTimeout to finish and then proceeds with pending code.
+ */
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
