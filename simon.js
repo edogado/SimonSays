@@ -17,13 +17,14 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /*----------------------------------------------------------------------------------------------------------------------
 TurnButtonOnAndOff changes the color of a button to a brighter color for a brief period of time.
-The program stops for a set amount of time to eventually change the color back to its original darker color.*/
+The program stops for a set amount of time to allow user to see the change in color and the program eventually changes
+the color back to its original darker color.*/
 const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
-    button.style.background = onColor;
-    let sound = new Audio(`clickSounds/${button.id}Button.wav`);
-    await sound.play();
-    await sleep(duration);
-    button.style.background = offColor;
+    button.style.background = onColor;//changing button to a brighter color
+    let sound = new Audio(`clickSounds/${button.id}Button.wav`);//get the sound for the specific button
+    await sound.play();//play sound for the specific button
+    await sleep(duration);//stop program for the amount entered
+    button.style.background = offColor;//set the button color back to its original.
 }
 
 class Computer {
