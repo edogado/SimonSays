@@ -30,13 +30,19 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
 /*----------------------------------------------------------------------------------------------------------------------
 The computer class handles everything related to the color sequences for the game. */
 class Computer {
+    //array to store the sequence to follow
     #pattern = [];
+    //variable needed for the continuation of the game
     gameOver = false;
 
+    //------------------------------------------------------------------------------------------------------------------
     restartPattern(){
+        //creates a new empty array for an entirely new sequence
         this.#pattern = [];
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     Returns the array containing the sequence of the colors.*/
     get getPattern(){
         return this.#pattern;
     }
