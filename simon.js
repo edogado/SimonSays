@@ -53,12 +53,15 @@ class Computer {
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    RunGame contains the logic for the game's Artificial Intelligence (Simon)
+     */
     async runGame(){
-        if (this.gameOver) return;
+        if (this.gameOver) return;//if game ended, we don't run Simon
         this.createPattern();
         await sleep(750);//gives the user 1 sec to get ready after the game starts
-        for (let i =0; i < this.#pattern.length; i++){
-            if (this.gameOver) break;
+        for (let i =0; i < this.#pattern.length; i++){//we iterate through the pattern array to show the sequence
+            if (this.gameOver) break;//in case the game ends while simon is playing, we stop the game
             if (this.#pattern[i] === 1){
                 await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 750);
             }
