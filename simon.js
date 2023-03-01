@@ -47,6 +47,8 @@ class Computer {
         return this.#pattern;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    CreatePattern gets a random number from 1 to 4 and inserts it in the pattern array.*/
     createPattern(){
         this.#pattern.push(Math.floor(Math.random() * 4) + 1);
     }
