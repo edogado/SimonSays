@@ -78,6 +78,8 @@ class Computer {
         }
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    StopGame updates the gameOver boolean which is used as a conditional to run the game.*/
     stopGame(){
         this.gameOver = true;
         this.restartPattern();
