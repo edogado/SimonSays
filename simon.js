@@ -74,7 +74,7 @@ class Computer {
             else if (color === 4){
                 await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 750);
             }
-            await sleep(300);//pause btw lights in case we get the same button consecutively
+            await sleep(350);//pause btw lights in case we get the same button consecutively
         }
     }
 
