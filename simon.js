@@ -31,26 +31,26 @@ const turnButtonOnAndOff = async (button, onColor, offColor, duration) => {
 The computer class handles everything related to the color sequences for the game. */
 class Computer {
     //array to store the sequence to follow
-    #pattern = [];
+    #colorPattern = [];
     //variable needed for the continuation of the game
     gameOver = false;
 
     //------------------------------------------------------------------------------------------------------------------
     restartPattern(){
         //creates a new empty array for an entirely new sequence
-        this.#pattern = [];
+        this.#colorPattern = [];
     }
 
     /*------------------------------------------------------------------------------------------------------------------
      Returns the array containing the sequence of the colors.*/
     get getPattern(){
-        return this.#pattern;
+        return this.#colorPattern;
     }
 
     /*------------------------------------------------------------------------------------------------------------------
     CreatePattern gets a random number from 1 to 4 and inserts it in the pattern array.*/
     createPattern(){
-        this.#pattern.push(Math.floor(Math.random() * 4) + 1);
+        this.#colorPattern.push(Math.floor(Math.random() * 4) + 1);
     }
 
     /*------------------------------------------------------------------------------------------------------------------
@@ -60,18 +60,18 @@ class Computer {
         if (this.gameOver) return;//if game ended, we don't run Simon
         this.createPattern();
         await sleep(750);//gives the user 1 sec to get ready after the game starts
-        for (let i =0; i < this.#pattern.length; i++){//we iterate through the pattern array to show the sequence
+        for (let color of this.#colorPattern){//we iterate through the pattern array to show the sequence
             if (this.gameOver) break;//in case the game ends while simon is playing, we stop the game
-            if (this.#pattern[i] === 1){
+            if (color === 1){
                 await turnButtonOnAndOff(greenButton, 'limegreen', 'darkgreen', 750);
             }
-            else if (this.#pattern[i] === 2) {
+            else if (color === 2) {
                 await turnButtonOnAndOff(redButton, 'red', 'darkred', 750);
             }
-            else if (this.#pattern[i] === 3){
+            else if (color === 3){
                 await turnButtonOnAndOff(yellowButton, 'yellow', '#B58B00', 750);
             }
-            else if (this.#pattern[i] === 4){
+            else if (color === 4){
                 await turnButtonOnAndOff(blueButton, 'blue', 'darkblue', 750);
             }
             await sleep(300);//pause btw lights in case we get the same button consecutively
