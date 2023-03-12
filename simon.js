@@ -36,8 +36,9 @@ class Computer {
     gameOver = false;
 
     //------------------------------------------------------------------------------------------------------------------
+    //Creates a new empty array for an entirely new sequence
     restartPattern(){
-        //creates a new empty array for an entirely new sequence
+
         this.#colorPattern = [];
     }
 
