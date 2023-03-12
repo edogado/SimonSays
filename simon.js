@@ -92,12 +92,14 @@ The Simon class contains the methods and logic needed for the entire game */
 class Simon{
 
     constructor() {
-        this.computer = new Computer();
+        this.computer = new Computer();//creating the AI for the color sequence
         this.points = 0;
-        this.expectedColors = [];
-        this.aButtonIsLit = false;
+        this.expectedColors = [];//a copy of the AI color list; we won't change the original list
+        this.aButtonIsLit = false;//if a button is lit, we don't let other buttons turn on
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    This method allows the game to continue when the user manages to complete a full sequence correctly. */
     async continueGame() {
         turn.innerText = "Simon's turn";
         score.innerText = `${++this.points}`;
