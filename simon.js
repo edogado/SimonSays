@@ -115,10 +115,12 @@ class Simon{
         if (!this.computer.gameOver) turn.innerText = "Your turn";//if user hasn't stop the game midway, we update the screen
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    This method is used when the user decides to stop the game or when they got a sequence wrong.*/
     gameIsOver(){
-        this.aButtonIsLit = true;
-        turn.innerText = 'Game Over';
-        this.computer.stopGame();
+        this.aButtonIsLit = true;//disabling all buttons
+        turn.innerText = 'Game Over';//updating screen
+        this.computer.stopGame();// stopping AI
     }
 
     async buttonHandler(button, onColor, offColor, buttonNumber) {
