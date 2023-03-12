@@ -87,6 +87,8 @@ class Computer {
     }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+The Simon class contains the methods and logic needed for the entire game */
 class Simon{
 
     constructor() {
