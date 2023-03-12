@@ -123,20 +123,28 @@ class Simon{
         this.computer.stopGame();// stopping AI
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    This method will light up the buttons the user pressed. Parameters required are the pressed button, color when
+    lighting up, color when turning off, and the number representing each button.
+    1 -> green button,
+    2 -> red button,
+    3 -> yellow button,
+    4 -> blue button*/
     async buttonHandler(button, onColor, offColor, buttonNumber) {
+        //if a button has been pressed, or the AI colors isn't ready, we don't do anything
         if (this.aButtonIsLit || this.expectedColors.length === 0) return;
-        this.aButtonIsLit = true;
-        await turnButtonOnAndOff(button, onColor, offColor, 500);
-        let colorToCurrentlyGuess = this.expectedColors.shift();
-        console.log('Color expected: ', colorToCurrentlyGuess);
+        this.aButtonIsLit = true;//we disable buttons for user since a button was just pressed
+        await turnButtonOnAndOff(button, onColor, offColor, 500);//turn on pressed button for 500ms
+        let colorToCurrentlyGuess = this.expectedColors.shift();//we need to compare the pressed button with the first color of the sequence
+        //console.log('Color expected: ', colorToCurrentlyGuess);
 
-        if (colorToCurrentlyGuess === buttonNumber){
-            if (this.expectedColors.length === 0) {
-                await this.continueGame();
+        if (colorToCurrentlyGuess === buttonNumber){ //if the first/next AI's color in the sequence matches the pressed button
+            if (this.expectedColors.length === 0) {// and if user continue the sequence correctly and there are no more colors
+                await this.continueGame();//we request a new color for a longer sequence
             }
-            this.aButtonIsLit = false;
+            this.aButtonIsLit = false;//we enable buttons again for the user to click and continue the sequence/game
         }
-        else {
+        else { //if the button doesn't match the AI's first/next color in the sequence
             this.gameIsOver();
         }
     }
