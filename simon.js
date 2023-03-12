@@ -99,7 +99,8 @@ class Simon{
     }
 
     /*------------------------------------------------------------------------------------------------------------------
-    This method allows the game to continue when the user manages to complete a full sequence correctly. */
+    This method allows the game to continue when the user manages to complete a full sequence correctly.
+    It also updates the user's score. */
     async continueGame() {
         turn.innerText = "Simon's turn";
         score.innerText = `${++this.points}`;
