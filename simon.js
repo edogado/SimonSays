@@ -149,18 +149,23 @@ class Simon{
         }
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    This method starts the whole game and allows the restart and end game buttons to appear on the screen while the start button
+    disappears.*/
     async startGame() {
         restartGame.classList.remove('invisibleButton');
         endGame.classList.remove('invisibleButton');
         startGame.classList.add('invisibleButton');
 
-        score.innerText = '0';
+        score.innerText = '0';//initial user's score
         turn.innerText = "Simon's turn"
-        await this.computer.runGame();
-        this.expectedColors = [...this.computer.getPattern];
-        console.log('Expected colors: ', this.expectedColors);
+        await this.computer.runGame();//AI creates a sequence
+        this.expectedColors = [...this.computer.getPattern];//copy AI sequence for comparison in the button handler
+        //console.log('Expected colors: ', this.expectedColors);
 
         turn.innerText = "Your turn";
+
+        //every button calls the buttonHandler method when it is clicked and passes on their number for comparison
         greenButton.addEventListener('click', async () => {
             await this.buttonHandler(greenButton, 'limegreen', 'darkgreen', 1);
         });
