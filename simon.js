@@ -94,8 +94,10 @@ class Simon{
     constructor() {
         this.computer = new Computer();//creating the AI for the color sequence
         this.points = 0;
-        this.expectedColors = [];//a copy of the AI color list; we won't change the original list
-        this.aButtonIsLit = false;//if a button is lit, we don't let other buttons turn on
+        //a copy of the AI color list; we won't change the original list
+        this.expectedColors = [];
+        //if a button is lit, we don't let other buttons turn on
+        this.aButtonIsLit = false;
     }
 
     /*------------------------------------------------------------------------------------------------------------------
@@ -183,6 +185,8 @@ class Simon{
         });
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+    This method restarts everything when user presses the restart button.*/
     async restart(){
         this.computer.restartPattern();
         this.computer.gameOver = false;
