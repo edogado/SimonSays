@@ -192,12 +192,13 @@ class Simon{
         this.computer.gameOver = false;
         this.points = 0;
         score.innerText = '0';
-        this.expectedColors = [];
-        this.aButtonIsLit = false;
+        this.expectedColors = [];//a new list for comparison
+        this.aButtonIsLit = true;//disable buttons while AI gets a sequence
         turn.innerText = "Simon's turn";
-        await this.computer.runGame();
+        await this.computer.runGame();//AI creates a new sequence
         this.expectedColors = [...this.computer.getPattern];
         turn.innerText = "Your turn";
+        this.aButtonIsLit = false;//enabling buttons for user
     }
 }
 
