@@ -104,14 +104,15 @@ class Simon{
     async continueGame() {
         turn.innerText = "Simon's turn";
         score.innerText = `${++this.points}`;
+        //if the user gets a higher score than their previous high score, we update best score
         if (bestScore.innerText === '' || parseInt(bestScore.innerText) < this.points){
             bestScore.innerText = this.points;
-            bestScoreContainer.style.display = 'block';
+            bestScoreContainer.style.display = 'block';//best score is hidden until we start the game and complete a sequence
         }
-        await this.computer.runGame();
-        this.expectedColors = [...this.computer.getPattern];
-        console.log('Expected colors: ', this.expectedColors);
-        if (!this.computer.gameOver) turn.innerText = "Your turn";
+        await this.computer.runGame();//we request a new random color for a new sequence
+        this.expectedColors = [...this.computer.getPattern];//we update the new list of colors the user has to click correctly
+        //console.log('Expected colors: ', this.expectedColors);
+        if (!this.computer.gameOver) turn.innerText = "Your turn";//if user hasn't stop the game midway, we update the screen
     }
 
     gameIsOver(){
