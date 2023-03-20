@@ -92,7 +92,8 @@ The Simon class contains the methods and logic needed for the entire game */
 class Simon{
 
     constructor() {
-        this.computer = new Computer();//creating the AI for the color sequence
+        //creating the AI for the color sequence
+        this.computer = new Computer();
         this.points = 0;
         //a copy of the AI color list; we won't change the original list
         this.expectedColors = [];
