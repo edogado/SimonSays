@@ -156,9 +156,10 @@ class Simon{
     This method starts the whole game and allows the restart and end game buttons to appear on the screen while the start button
     disappears.*/
     async startGame() {
-        restartGame.classList.remove('invisibleButton');
-        endGame.classList.remove('invisibleButton');
-        startGame.classList.add('invisibleButton');
+        turn.classList.remove('turn-blinking');//'press start' message stops blinking
+        restartGame.classList.remove('invisibleButton');//restart button is visible now
+        endGame.classList.remove('invisibleButton');//End Game button is visible now
+        startGame.classList.add('invisibleButton');//start button is invisible now
 
         score.innerText = '0';//initial user's score
         turn.innerText = "Simon's turn"
@@ -203,17 +204,12 @@ class Simon{
     }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+Run Thread */
 document.addEventListener('DOMContentLoaded', ()=> {
-    turn.classList.add('turn-blinking');
-    restartGame.classList.add('invisibleButton');
-    endGame.classList.add('invisibleButton');
-    let simon;
+    let simon = new Simon();//creating new game
 
-    startGame.addEventListener('click', ()=> {
-        turn.classList.remove('turn-blinking');
-        simon = new Simon();
-        simon.startGame().then();
-    });
+    startGame.addEventListener('click', ()=> simon.startGame().then());
 
     restartGame.addEventListener('click', ()=> simon.restart());
 
