@@ -10,6 +10,9 @@
 
 body{
     background-color: rgb(07,07,30);
+}
+
+#game-container{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -47,7 +50,7 @@ h3:last-child{
     display: none;
 }
 
-#game-container{
+#colors-container{
     width: 450px;
     height: 450px;
 }
@@ -153,5 +156,17 @@ button:active {
 
 .invisibleButton{
     display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    #game-container {
+        height: 100vh;
+        margin: 1rem 5rem;
+        background-color: red;
+    }
+
+    #scores-container{
+        width: 20%;
+    }
 }
 
